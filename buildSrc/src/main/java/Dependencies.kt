@@ -9,6 +9,7 @@ object Versions {
     const val junitVersion = "4.13.2"
     const val junitExtVersion = "1.1.2"
     const val espressoVersion = "3.3.0"
+    const val viewPager2Version= "1.0.0"
 }
 
 object Dependencies {
@@ -19,4 +20,5 @@ object Dependencies {
     const val junit = "junit:junit:${Versions.junitVersion}"
     const val junit_ext = "androidx.test.ext:junit:${Versions.junitExtVersion}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoVersion}"
+    const val viewpager2= "androidx.viewpager2:viewpager2:${Versions.viewPager2Version}"
 }

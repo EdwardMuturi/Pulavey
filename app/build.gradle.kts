@@ -43,6 +43,7 @@ dependencies {
         implementation(app_compat)
         implementation(material_ui)
         implementation(constraint_layout)
+        implementation(viewpager2)
         testImplementation(junit)
         androidTestImplementation(junit_ext)
         androidTestImplementation(espresso)
