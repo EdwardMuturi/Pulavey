@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:fitsSystemWindows="true"
+    android:background="@color/blue_500"
     tools:context=".SplashActivity">
 
     <com.google.android.material.textview.MaterialTextView
@@ -13,6 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Pulavey"
         style="?attr/textAppearanceHeadline3"
+        android:textColor="@color/green_300"
         android:textAlignment="center"
         android:layout_gravity="center"/>
 
@@ -20,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pula Survey"
+        android:textColor="@color/green_300"
         style="?attr/textAppearanceSubtitle1"
         android:textAlignment="center"
         android:layout_gravity="center"
