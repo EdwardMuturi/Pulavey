@@ -4,16 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.mementoguy.pulavey.R
+import com.mementoguy.pulavey.databinding.ActivitySurveyBinding
 import com.mementoguy.pulavey.survey.questionnaire.QuestionnareViewPagerAdapter
 
-val questionnareViewPagerAdapter= QuestionnareViewPagerAdapter()
+private val questionnareViewPagerAdapter= QuestionnareViewPagerAdapter()
+private lateinit var binding: ActivitySurveyBinding
 
 class SurveyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_survey)
+        binding= ActivitySurveyBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val viewPager= findViewById<ViewPager2>(R.id.vp_survey)
-        viewPager.adapter= questionnareViewPagerAdapter
+        binding.vpSurvey.adapter= questionnareViewPagerAdapter
     }
 }
