@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
+import com.mementoguy.pulavey.survey.SurveyActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     fun navigateToMainActivity() {
-        val mainActivityIntent = Intent(this, MainActivity::class.java)
+        val mainActivityIntent = Intent(this, SurveyActivity::class.java)
         Handler().postDelayed({
             startActivity(mainActivityIntent)
         }, 1200)
