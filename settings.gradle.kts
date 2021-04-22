@@ -8,4 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Pulavey"
 include(":app")
- 
+include(":app:buildSrc")
