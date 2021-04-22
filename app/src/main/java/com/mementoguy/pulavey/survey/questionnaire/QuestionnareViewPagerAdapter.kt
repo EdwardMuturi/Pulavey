@@ -15,14 +15,6 @@ import com.mementoguy.pulavey.survey.model.Question
  */
 class QuestionnareViewPagerAdapter() : ListAdapter<Question, QuestionnareViewPagerAdapter.ViewHolder>(itemDiffUtil) {
 
-    private var mutableItemClickListener: View.OnClickListener? = null
-    private val itemClickListener: View.OnClickListener by lazy {
-        mutableItemClickListener!!
-    }
-
-    fun setOnItemClickListener(itemClickListener: View.OnClickListener) {
-        mutableItemClickListener = itemClickListener
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding= LayoutQuestionnareBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -41,8 +33,6 @@ class QuestionnareViewPagerAdapter() : ListAdapter<Question, QuestionnareViewPag
                 tvQuestion.text= item.questionText
             }
 
-            itemView.tag = this
-            itemView.setOnClickListener(itemClickListener)
         }
     }
 }
