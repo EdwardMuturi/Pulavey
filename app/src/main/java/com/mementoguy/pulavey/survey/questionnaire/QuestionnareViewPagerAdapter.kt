@@ -38,7 +38,7 @@ class QuestionnareViewPagerAdapter() : ListAdapter<Question, QuestionnareViewPag
 
         fun bind(item: Question) {
             with(itemView) {
-                // TODO: Bind the data with View
+//                itemView.
             }
 
             itemView.tag = this
