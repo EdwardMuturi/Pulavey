@@ -4,10 +4,10 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.View.OnClickListener
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.mementoguy.pulavey.R
+import com.mementoguy.pulavey.databinding.LayoutQuestionnareBinding
 import com.mementoguy.pulavey.survey.model.Question
 
 /**
@@ -25,8 +25,8 @@ class QuestionnareViewPagerAdapter() : ListAdapter<Question, QuestionnareViewPag
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_questionnare, parent, false)
-        return ViewHolder(view)
+        val binding= LayoutQuestionnareBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -34,11 +34,11 @@ class QuestionnareViewPagerAdapter() : ListAdapter<Question, QuestionnareViewPag
         holder.bind(item)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(private val layoutQuestionnareBinding:  LayoutQuestionnareBinding) : RecyclerView.ViewHolder(layoutQuestionnareBinding.root) {
 
         fun bind(item: Question) {
-            with(itemView) {
-//                itemView.
+            with(layoutQuestionnareBinding) {
+                tvQuestion.text= item.questionText
             }
 
             itemView.tag = this
@@ -49,10 +49,10 @@ class QuestionnareViewPagerAdapter() : ListAdapter<Question, QuestionnareViewPag
 
 val itemDiffUtil = object : DiffUtil.ItemCallback<Question>() {
     override fun areItemsTheSame(oldItem: Question, newItem: Question): Boolean {
-        TODO("not implemented")
+        return oldItem == newItem
     }
 
     override fun areContentsTheSame(oldItem: Question, newItem: Question): Boolean {
-        TODO("not implemented")
+        return oldItem.id == newItem.id && oldItem.questionText == newItem.questionText
     }
 }

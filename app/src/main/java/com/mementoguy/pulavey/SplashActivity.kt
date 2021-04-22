@@ -24,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
         navigateToMainActivity()
     }
 
-    fun navigateToMainActivity() {
+    private fun navigateToMainActivity() {
         val mainActivityIntent = Intent(this, SurveyActivity::class.java)
         Handler().postDelayed({
             startActivity(mainActivityIntent)
