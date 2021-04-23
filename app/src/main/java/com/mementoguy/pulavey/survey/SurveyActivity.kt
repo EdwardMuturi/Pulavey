@@ -24,8 +24,7 @@ class SurveyActivity : AppCompatActivity() {
         val questions= listOf<Question>(Question("q_gender", "SELECT_ONE", "SINGLE_LINE_TEXT",
             "What is your gender?", listOf(Option("MALE", "Male")) ),
 
-            Question("q_name", "FREE_TEXT", "SINGLE_LINE_TEXT",
-            "What is your name?", emptyList<Option>(), "q_age" ),
+            Question("q_name", "FREE_TEXT", "SINGLE_LINE_TEXT", "What is your name?", emptyList<Option>(), "q_age" ),
 
             Question("q_age", "FREE_TEXT", "INTEGER",
                 "How old are you?", emptyList<Option>(),  "q_gender" )
