@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".survey.SurveyActivity"
+            android:name=".survey.ui.SurveyActivity"
             android:exported="true">
         </activity>
     </application>

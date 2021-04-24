@@ -14,7 +14,7 @@ class SurveyViewModel : ViewModel() {
     private val mutableQuestions: MutableLiveData<List<Question>> = MutableLiveData()
     val questions : LiveData<List<Question>> get() = mutableQuestions
 
-    fun loadQuestions(){
+    fun loadSurvey(){
         mutableQuestions.value= listOf<Question>(
             Question(
                 "q_gender", "SELECT_ONE", "SINGLE_LINE_TEXT",
