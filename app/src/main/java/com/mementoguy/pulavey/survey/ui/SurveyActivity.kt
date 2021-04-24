@@ -1,53 +1,44 @@
-package com.mementoguy.pulavey.survey
+package com.mementoguy.pulavey.survey.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import com.mementoguy.pulavey.databinding.ActivitySurveyBinding
-import com.mementoguy.pulavey.survey.model.Option
 import com.mementoguy.pulavey.survey.model.Question
 import com.mementoguy.pulavey.survey.questionnaire.QuestionnareViewPagerAdapter
-
-private val questionnareViewPagerAdapter = QuestionnareViewPagerAdapter()
-private lateinit var binding: ActivitySurveyBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SurveyActivity : AppCompatActivity() {
+
+    private val questionnareViewPagerAdapter = QuestionnareViewPagerAdapter()
+    private lateinit var binding: ActivitySurveyBinding
+    private val surveyViewModel: SurveyViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySurveyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //TODO get list through viewmodel
-        val questions = listOf<Question>(
-            Question(
-                "q_gender", "SELECT_ONE", "SINGLE_LINE_TEXT",
-                "What is your gender?", listOf(Option("MALE", "Male"))
-            ),
+        surveyViewModel.loadSurvey()
+        displayQuestions()
+    }
 
-            Question(
-                "q_name",
-                "FREE_TEXT",
-                "SINGLE_LINE_TEXT",
-                "What is your name?",
-                emptyList<Option>(),
-                "q_age"
-            ),
+    private fun displayQuestions() {
+        surveyViewModel.questions.observe(this, Observer { questions ->
+            setUpQuestionnareViewPager(questions)
+            displayNextQuestion(questions)
+        })
+    }
 
-            Question(
-                "q_age", "FREE_TEXT", "INTEGER",
-                "How old are you?", emptyList<Option>(), "q_gender"
-            )
-        )
-
+    private fun setUpQuestionnareViewPager(questions: List<Question>) {
         binding.vpSurvey.adapter = questionnareViewPagerAdapter
         questionnareViewPagerAdapter.submitList(questions)
-        displayNextQuestion(questions)
-
     }
 
     private fun displayNextQuestion(questions: List<Question>) {
-        with(binding){
+        with(binding) {
             btnNext.setOnClickListener {
                 if (vpSurvey.currentItem != questions.size - 1)
                     vpSurvey.currentItem++

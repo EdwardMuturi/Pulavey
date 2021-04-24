@@ -10,6 +10,7 @@ object Versions {
     const val junitExtVersion = "1.1.2"
     const val espressoVersion = "3.3.0"
     const val viewPager2Version= "1.0.0"
+    const val koin_version= "3.0.1"
 }
 
 object Dependencies {
@@ -21,4 +22,8 @@ object Dependencies {
     const val junit_ext = "androidx.test.ext:junit:${Versions.junitExtVersion}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoVersion}"
     const val viewpager2= "androidx.viewpager2:viewpager2:${Versions.viewPager2Version}"
+    const val koin= "io.insert-koin:koin-android:${Versions.koin_version}"
+    const val koin_work_manager= "io.insert-koin:koin-androidx-workmanager:${Versions.koin_version}"
+
+
 }

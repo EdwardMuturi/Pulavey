@@ -1,13 +1,13 @@
-package com.mementoguy.pulavey
+package com.mementoguy.pulavey.intro
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.mementoguy.pulavey.databinding.ActivitySplashBinding
-import com.mementoguy.pulavey.survey.SurveyActivity
+import com.mementoguy.pulavey.survey.ui.SurveyActivity
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
