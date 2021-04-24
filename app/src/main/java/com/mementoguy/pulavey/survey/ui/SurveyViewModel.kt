@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mementoguy.pulavey.survey.data.SurveyRepository
-import com.mementoguy.pulavey.survey.model.Option
 import com.mementoguy.pulavey.survey.model.Question
 import kotlinx.coroutines.launch
 
@@ -19,7 +18,7 @@ class SurveyViewModel(private val surveyRepository: SurveyRepository) : ViewMode
 
     fun loadSurvey(){
         viewModelScope.launch {
-            mutableQuestions.value= surveyRepository.fetchSurveyFromServer().questions
+            mutableQuestions.value= surveyRepository.fetchSurvey().questions
         }
     }
 

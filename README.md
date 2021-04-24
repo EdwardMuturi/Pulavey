@@ -11,4 +11,5 @@ Below is a list of libraries used:
 * Gson
 * Gson Converter
 * Room
+* Coroutines
 
