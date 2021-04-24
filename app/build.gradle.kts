@@ -45,6 +45,8 @@ dependencies {
         implementation(material_ui)
         implementation(constraint_layout)
         implementation(viewpager2)
+        implementation(koin)
+        implementation(koin_work_manager)
         testImplementation(junit)
         androidTestImplementation(junit_ext)
         androidTestImplementation(espresso)
