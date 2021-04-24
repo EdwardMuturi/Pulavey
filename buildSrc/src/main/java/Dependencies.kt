@@ -27,7 +27,7 @@ object Dependencies {
     const val koin= "io.insert-koin:koin-android:${Versions.koin_version}"
     const val koin_work_manager= "io.insert-koin:koin-androidx-workmanager:${Versions.koin_version}"
     const val retrofit= "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
-    const val gson_converter= "com.squareup.retrofit2:converter-gson:${Versions.gson_version}"
+    const val gson_converter= "com.squareup.retrofit2:converter-gson:${Versions.retrofit_version}"
     const val gson= "com.google.code.gson:gson:${Versions.gson_version}"
 
 }
