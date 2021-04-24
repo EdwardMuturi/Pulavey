@@ -2,6 +2,7 @@ package com.mementoguy.pulavey.survey.di
 
 import com.mementoguy.pulavey.survey.data.SurveyRepository
 import com.mementoguy.pulavey.survey.data.SurveyRepositoryImpl
+import com.mementoguy.pulavey.survey.data.SurveyService
 import com.mementoguy.pulavey.survey.ui.SurveyViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

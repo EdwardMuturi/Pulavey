@@ -44,6 +44,7 @@ dependencies {
         implementation(app_compat)
         implementation(material_ui)
         implementation(constraint_layout)
+        implementation(viewModel)
         implementation(viewpager2)
         implementation(koin)
         implementation(koin_work_manager)
