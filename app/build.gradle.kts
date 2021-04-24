@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -44,9 +45,19 @@ dependencies {
         implementation(app_compat)
         implementation(material_ui)
         implementation(constraint_layout)
+        implementation(viewModel)
         implementation(viewpager2)
         implementation(koin)
         implementation(koin_work_manager)
+        implementation(retrofit)
+        implementation(gson)
+        implementation(gson_converter)
+        implementation(okhttp)
+        implementation(okhttp_interceptor)
+        implementation(room)
+        implementation(room_ktx)
+        kapt (room_compiler)
+        testImplementation(room_testing)
         testImplementation(junit)
         androidTestImplementation(junit_ext)
         androidTestImplementation(espresso)

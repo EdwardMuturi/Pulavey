@@ -1,9 +1,17 @@
 package com.mementoguy.pulavey.survey.model
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Created by Edward Muturi on 22/04/2021.
  */
-data class Question (val id: String, val questionType: String, val answerType: String, val questionText: String,
+data class Question (val id: String,
+                     @SerializedName("question_type")
+                     val questionType: String,
+                     @SerializedName("answer_type")
+                     val answerType: String,
+                     @SerializedName("question_text")
+                     val questionText: String,
     val options: List<Option>,
     val next: String? = null
 )

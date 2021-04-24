@@ -8,5 +8,8 @@ Below is a list of libraries used:
 * ViewModel
 * Livedata
 * Retrofit
+* Gson
+* Gson Converter
 * Room
+* Coroutines
 
