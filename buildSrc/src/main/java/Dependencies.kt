@@ -11,6 +11,8 @@ object Versions {
     const val espressoVersion = "3.3.0"
     const val viewPager2Version= "1.0.0"
     const val koin_version= "3.0.1"
+    const val retrofit_version= "2.9.0"
+    const val gson_version= "2.8.6"
 }
 
 object Dependencies {
@@ -24,6 +26,8 @@ object Dependencies {
     const val viewpager2= "androidx.viewpager2:viewpager2:${Versions.viewPager2Version}"
     const val koin= "io.insert-koin:koin-android:${Versions.koin_version}"
     const val koin_work_manager= "io.insert-koin:koin-androidx-workmanager:${Versions.koin_version}"
-
+    const val retrofit= "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
+    const val gson_converter= "com.squareup.retrofit2:converter-gson:${Versions.gson_version}"
+    const val gson= "com.google.code.gson:gson:${Versions.gson_version}"
 
 }
