@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -51,6 +52,10 @@ dependencies {
         implementation(retrofit)
         implementation(gson)
         implementation(gson_converter)
+        implementation(room)
+        implementation(room_ktx)
+        kapt (room_compiler)
+        testImplementation(room_testing)
         testImplementation(junit)
         androidTestImplementation(junit_ext)
         androidTestImplementation(espresso)

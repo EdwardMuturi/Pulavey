@@ -14,6 +14,8 @@ object Versions {
     const val retrofit_version= "2.9.0"
     const val gson_version= "2.8.6"
     const val lifecycle_version = "2.3.1"
+    const val okhttp_version= "4.9.0"
+    const val room_version = "2.3.0"
 }
 
 object Dependencies {
@@ -31,5 +33,11 @@ object Dependencies {
     const val gson_converter= "com.squareup.retrofit2:converter-gson:${Versions.retrofit_version}"
     const val gson= "com.google.code.gson:gson:${Versions.gson_version}"
     const val viewModel= "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle_version}"
+    const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp_version}"
+    const val okhttp_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp_version}"
+    const val room = "androidx.room:room-runtime:${Versions.room_version}"
+    const val room_compiler= "androidx.room:room-compiler:${Versions.room_version}"
+    const val room_ktx= "androidx.room:room-ktx:${Versions.room_version}"
+    const val room_testing= "androidx.room:room-testing:${Versions.room_version}"
 
 }
