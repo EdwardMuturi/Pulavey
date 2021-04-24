@@ -1,5 +1,7 @@
 package com.mementoguy.pulavey.survey.di
 
+import com.mementoguy.pulavey.survey.ui.SurveyViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**
@@ -7,5 +9,5 @@ import org.koin.dsl.module
  */
 
 val appModule= module {
-
+    viewModel { SurveyViewModel() }
 }
