@@ -32,17 +32,19 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding= true
+    }
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     with(Dependencies) {
         implementation(kotlin_ktx)
         implementation(app_compat)
         implementation(material_ui)
         implementation(constraint_layout)
+        implementation(viewpager2)
         testImplementation(junit)
         androidTestImplementation(junit_ext)
         androidTestImplementation(espresso)
