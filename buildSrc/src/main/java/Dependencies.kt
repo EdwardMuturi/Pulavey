@@ -14,7 +14,7 @@ object Versions {
     const val retrofit_version= "2.9.0"
     const val gson_version= "2.8.6"
     const val lifecycle_version = "2.3.1"
-    const val okhttp_version= "4.9.0"
+    const val okhttp_version= "4.3.1"
     const val room_version = "2.3.0"
 }
 

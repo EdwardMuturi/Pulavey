@@ -10,11 +10,10 @@ interface SurveyRepository {
     suspend fun fetchSurvey(): Survey
 }
 
-class SurveyRepositoryImpl : SurveyRepository {
-    val api= SurveyService.getSurveyService
+class SurveyRepositoryImpl(val surveyService: SurveyService) : SurveyRepository {
 
     override suspend fun fetchSurvey(): Survey {
-        val requestResult= api.fetchSurvey()
+        val requestResult= surveyService.fetchSurvey()
         return requestResult.body()!!
     }
 }

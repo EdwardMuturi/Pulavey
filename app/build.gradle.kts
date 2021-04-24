@@ -52,6 +52,8 @@ dependencies {
         implementation(retrofit)
         implementation(gson)
         implementation(gson_converter)
+        implementation(okhttp)
+        implementation(okhttp_interceptor)
         implementation(room)
         implementation(room_ktx)
         kapt (room_compiler)
