@@ -1,10 +1,13 @@
 package com.mementoguy.pulavey.survey.di
 
+import android.app.Application
+import androidx.room.Room
 import com.mementoguy.pulavey.survey.data.SurveyRepository
 import com.mementoguy.pulavey.survey.data.SurveyRepositoryImpl
 import com.mementoguy.pulavey.survey.data.SurveyService
 import com.mementoguy.pulavey.survey.ui.SurveyViewModel
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -53,4 +56,19 @@ val networkModule = module {
 
     single { provideHttpClient() }
     single { provideRetrofit(get()) }
+}
+
+val dbModule = module {
+    fun provideDatabase(application: Application): SurveyDatabase {
+        return Room.databaseBuilder(application, SurveyDatabase::class.java, "survey")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    fun provideSurveyDao(surveyDatabase: SurveyDatabase) : SurveyDao{
+        return surveyDatabase.SurveyDao
+    }
+
+    single { provideDatabase(androidApplication()) }
+    single { provideSurveyDao(get()) }
 }
