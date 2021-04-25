@@ -1,6 +1,7 @@
 package com.mementoguy.pulavey.survey.data
 
 import android.util.Log
+import com.mementoguy.pulavey.survey.db.SurveyDao
 import com.mementoguy.pulavey.survey.model.Survey
 
 /**
@@ -10,7 +11,7 @@ interface SurveyRepository {
     suspend fun fetchSurvey(): Survey
 }
 
-class SurveyRepositoryImpl(val surveyService: SurveyService) : SurveyRepository {
+class SurveyRepositoryImpl(val surveyService: SurveyService, surveyDao: SurveyDao) : SurveyRepository {
 
     override suspend fun fetchSurvey(): Survey {
         val requestResult= surveyService.fetchSurvey()

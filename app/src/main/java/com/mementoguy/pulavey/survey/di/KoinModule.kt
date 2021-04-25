@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.mementoguy.pulavey.survey.data.SurveyRepository
 import com.mementoguy.pulavey.survey.data.SurveyRepositoryImpl
 import com.mementoguy.pulavey.survey.data.SurveyService
+import com.mementoguy.pulavey.survey.db.SurveyDao
+import com.mementoguy.pulavey.survey.db.SurveyDatabase
 import com.mementoguy.pulavey.survey.ui.SurveyViewModel
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
@@ -19,7 +21,7 @@ import java.util.concurrent.TimeUnit
  */
 
 val appModule= module {
-    single<SurveyRepository>{SurveyRepositoryImpl(get())}
+    single<SurveyRepository>{SurveyRepositoryImpl(get(), get())}
     viewModel { SurveyViewModel(get()) }
 }
 
@@ -65,8 +67,8 @@ val dbModule = module {
             .build()
     }
 
-    fun provideSurveyDao(surveyDatabase: SurveyDatabase) : SurveyDao{
-        return surveyDatabase.SurveyDao
+    fun provideSurveyDao(surveyDatabase: SurveyDatabase) : SurveyDao {
+        return surveyDatabase.surveyDao
     }
 
     single { provideDatabase(androidApplication()) }
