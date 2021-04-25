@@ -18,7 +18,8 @@ class SurveyViewModel(private val surveyRepository: SurveyRepository) : ViewMode
 
     fun loadSurvey(){
         viewModelScope.launch {
-            mutableQuestions.value= surveyRepository.fetchSurvey().questions
+            surveyRepository.loadDataFromServer()
+            mutableQuestions.value= surveyRepository.fetchSurveyList()[0].questions//surveyRepository.fetchSurveyFromServer().questions
         }
     }
 

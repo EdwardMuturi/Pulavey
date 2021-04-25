@@ -14,11 +14,11 @@ import com.mementoguy.pulavey.survey.model.Survey
 interface SurveyDao {
 
     @Query("SELECT * FROM Survey")
-    fun findAllSurveys() : List<Survey>
+    suspend fun findAllSurveys() : List<Survey>
 
     @Query("SELECT * FROM Survey WHERE id =:Id")
-    fun findSurveyById(Id : String) : Survey
+    suspend fun findSurveyById(Id : String) : Survey
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveSurvey(survey: Survey)
+    suspend fun saveSurvey(survey: Survey)
 }
