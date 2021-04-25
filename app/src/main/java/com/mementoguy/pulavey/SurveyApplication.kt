@@ -5,6 +5,7 @@ import com.mementoguy.pulavey.survey.di.apiModule
 import com.mementoguy.pulavey.survey.di.appModule
 import com.mementoguy.pulavey.survey.di.dbModule
 import com.mementoguy.pulavey.survey.di.networkModule
+import com.mementoguy.pulavey.util.SurveySharePref
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,6 +16,7 @@ import org.koin.core.context.startKoin
 class SurveyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        SurveySharePref.initialize(this)
         startKoin {
             androidLogger()
             androidContext(this@SurveyApplication)
