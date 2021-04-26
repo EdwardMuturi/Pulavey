@@ -1,10 +1,10 @@
 package com.mementoguy.pulavey.survey.questionnaire
 
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.mementoguy.pulavey.databinding.LayoutQuestionnareBinding
@@ -31,9 +31,42 @@ class QuestionnareViewPagerAdapter() : ListAdapter<Question, QuestionnareViewPag
         fun bind(item: Question) {
             with(layoutQuestionnareBinding) {
                 tvQuestion.text= item.questionText
+
+                if(item.questionType == "SELECT_ONE") {
+                    radioGroup.visibility = View.VISIBLE
+                    tilResponse.visibility= View.GONE
+
+                    setRadioButtonsLabel(item)
+                    handleRadioGroupSelection(item)
+                } else {
+                    tilResponse.visibility = View.VISIBLE
+                    radioGroup.visibility = View.GONE
+                }
             }
 
         }
+
+        private fun setRadioButtonsLabel(question: Question){
+            with(layoutQuestionnareBinding){
+                radioButton1.text= question.options[0].displayText
+                radioButton2.text= question.options[1].displayText
+                radioButton3.text= question.options[2].displayText
+            }
+        }
+
+        private fun handleRadioGroupSelection(question: Question) {
+            with(layoutQuestionnareBinding){
+                radioGroup.setOnCheckedChangeListener { radioGroup, checkedId ->
+                    val tag= QuestionnareViewPagerAdapter::class.java.simpleName
+                    when(checkedId){
+                        radioButton1.id ->{ Log.e(tag, "selected Choice ${question.options[0].value}") }
+                        radioButton2.id ->{ Log.e(tag, "selected Choice ${question.options[1].value}") }
+                        radioButton3.id ->{ Log.e(tag, "selected Choice ${question.options[2].value}") }
+                    }
+                }
+            }
+        }
+
     }
 }
 
