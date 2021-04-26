@@ -1,12 +1,19 @@
 package com.mementoguy.pulavey.survey.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.view.get
 import androidx.lifecycle.Observer
+import com.google.android.material.textfield.TextInputEditText
+import com.mementoguy.pulavey.R
 import com.mementoguy.pulavey.databinding.ActivitySurveyBinding
 import com.mementoguy.pulavey.survey.model.Question
+import com.mementoguy.pulavey.survey.model.Response
 import com.mementoguy.pulavey.survey.questionnaire.QuestionnareViewPagerAdapter
 import com.mementoguy.pulavey.util.SurveySharePref
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,7 +33,10 @@ class SurveyActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         displayQuestions()
+        getResponseInput()
+        saveResponses()
     }
+
 
     private fun loadData(){
         // assumes list of survey and position represents selected survey
@@ -68,6 +78,16 @@ class SurveyActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun saveResponses(){
+        binding.btnFinish.setOnClickListener {
+            val responses= listOf(Response(1,"surv1", "Qtn1", "yes"))
+            surveyViewModel.saveResponses(responses)
+        }
+    }
+
+    private fun getResponseInput(){
     }
 
 }

@@ -1,13 +1,11 @@
 package com.mementoguy.pulavey
 
 import android.app.Application
-import com.mementoguy.pulavey.survey.di.apiModule
-import com.mementoguy.pulavey.survey.di.appModule
-import com.mementoguy.pulavey.survey.di.dbModule
-import com.mementoguy.pulavey.survey.di.networkModule
+import com.mementoguy.pulavey.survey.di.*
 import com.mementoguy.pulavey.util.SurveySharePref
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin
 
 /**
@@ -20,7 +18,8 @@ class SurveyApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@SurveyApplication)
-            modules(appModule, apiModule, networkModule, dbModule)
+            workManagerFactory()
+            modules(appModule, apiModule, networkModule, dbModule, workerModule)
         }
     }
 }

@@ -8,9 +8,13 @@ import com.mementoguy.pulavey.survey.data.SurveyService
 import com.mementoguy.pulavey.survey.db.SurveyDao
 import com.mementoguy.pulavey.survey.db.SurveyDatabase
 import com.mementoguy.pulavey.survey.ui.SurveyViewModel
+import com.mementoguy.pulavey.survey.workers.SaveResponsesWorker
+import com.mementoguy.pulavey.survey.workers.SyncOfflineResponsesWorker
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.workmanager.dsl.worker
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +26,7 @@ import java.util.concurrent.TimeUnit
 
 val appModule= module {
     single<SurveyRepository>{SurveyRepositoryImpl(get(), get())}
-    viewModel { SurveyViewModel(get()) }
+    viewModel { SurveyViewModel(get(), get()) }
 }
 
 val apiModule= module {
@@ -73,4 +77,9 @@ val dbModule = module {
 
     single { provideDatabase(androidApplication()) }
     single { provideSurveyDao(get()) }
+}
+
+val workerModule= module {
+    worker {  SaveResponsesWorker(androidContext(), get()) }
+    worker {  SyncOfflineResponsesWorker(androidContext(), get()) }
 }
