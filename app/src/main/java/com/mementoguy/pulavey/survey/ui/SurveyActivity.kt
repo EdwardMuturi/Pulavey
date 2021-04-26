@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.mementoguy.pulavey.R
 import com.mementoguy.pulavey.databinding.ActivitySurveyBinding
 import com.mementoguy.pulavey.survey.model.Question
+import com.mementoguy.pulavey.survey.model.Response
 import com.mementoguy.pulavey.survey.questionnaire.QuestionnareViewPagerAdapter
 import com.mementoguy.pulavey.util.SurveySharePref
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,17 +37,6 @@ class SurveyActivity : AppCompatActivity() {
         saveResponses()
     }
 
-//    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-////        return super.onCreateView(name, context, attrs)
-//        val view= layoutInflater.inflate(R.layout.layout_questionnare, null)
-//        val responseEditText= view.findViewById<TextInputEditText>(R.id.tiet_response)
-////        displayNextQuestion(questions)
-//        binding.btnNext.setOnClickListener {
-//            val responseInput= responseEditText.text?.trim()
-//            Toast.makeText(this, responseInput, Toast.LENGTH_SHORT).show()
-//        }
-//        return view
-//    }
 
     private fun loadData(){
         // assumes list of survey and position represents selected survey
@@ -68,6 +58,7 @@ class SurveyActivity : AppCompatActivity() {
     private fun displayQuestions() {
         surveyViewModel.questions.observe(this, Observer { questions ->
             setUpQuestionnareViewPager(questions)
+            displayNextQuestion(questions)
         })
     }
 
@@ -89,12 +80,14 @@ class SurveyActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveResponses(){}
+    private fun saveResponses(){
+        binding.btnFinish.setOnClickListener {
+            val responses= listOf(Response(1,"surv1", "Qtn1", "yes"))
+            surveyViewModel.saveResponses(responses)
+        }
+    }
 
     private fun getResponseInput(){
-        binding.btnFinish.setOnClickListener {
-
-        }
     }
 
 }
