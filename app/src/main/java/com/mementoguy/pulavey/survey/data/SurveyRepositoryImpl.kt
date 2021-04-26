@@ -10,19 +10,6 @@ import kotlinx.coroutines.withContext
 /**
  * Created by Edward Muturi on 24/04/2021.
  */
-interface SurveyRepository {
-    suspend fun loadDataFromServer()
-    suspend fun saveSurvey(survey: Survey)
-    suspend fun fetchSurveyFromServer(): Survey
-    suspend fun fetchSurveyList(): List<Survey>
-    suspend fun findSurveyById(Id: String) : Survey
-
-    suspend fun saveResponse(response: Response)
-    suspend fun updateResponse(response: Response)
-    suspend fun uploadResponse(response: Response)
-    suspend fun fetchResponsesNotUploaded(): List<Response>
-}
-
 class SurveyRepositoryImpl(val surveyService: SurveyService, val surveyDao: SurveyDao) : SurveyRepository {
     override suspend fun loadDataFromServer() {
         val survey= fetchSurveyFromServer()
