@@ -11,7 +11,7 @@ import com.mementoguy.pulavey.survey.model.Survey
 /**
  * Created by Edward Muturi on 25/04/2021.
  */
-@Database(entities = [Survey::class, Question::class, Option::class, Response::class], version = 1, exportSchema = false)
+@Database(entities = [Survey::class, Question::class, Option::class, Response::class], version = 2, exportSchema = false)
 @TypeConverters(QuestionConverter::class, OptionConverter::class)
 abstract class SurveyDatabase : RoomDatabase() {
     abstract val surveyDao : SurveyDao

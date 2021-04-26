@@ -1,10 +1,16 @@
 package com.mementoguy.pulavey.survey.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.view.get
 import androidx.lifecycle.Observer
+import com.google.android.material.textfield.TextInputEditText
+import com.mementoguy.pulavey.R
 import com.mementoguy.pulavey.databinding.ActivitySurveyBinding
 import com.mementoguy.pulavey.survey.model.Question
 import com.mementoguy.pulavey.survey.questionnaire.QuestionnareViewPagerAdapter
@@ -26,7 +32,21 @@ class SurveyActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         displayQuestions()
+        getResponseInput()
+        saveResponses()
     }
+
+//    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+////        return super.onCreateView(name, context, attrs)
+//        val view= layoutInflater.inflate(R.layout.layout_questionnare, null)
+//        val responseEditText= view.findViewById<TextInputEditText>(R.id.tiet_response)
+////        displayNextQuestion(questions)
+//        binding.btnNext.setOnClickListener {
+//            val responseInput= responseEditText.text?.trim()
+//            Toast.makeText(this, responseInput, Toast.LENGTH_SHORT).show()
+//        }
+//        return view
+//    }
 
     private fun loadData(){
         // assumes list of survey and position represents selected survey
@@ -48,7 +68,6 @@ class SurveyActivity : AppCompatActivity() {
     private fun displayQuestions() {
         surveyViewModel.questions.observe(this, Observer { questions ->
             setUpQuestionnareViewPager(questions)
-            displayNextQuestion(questions)
         })
     }
 
@@ -67,6 +86,14 @@ class SurveyActivity : AppCompatActivity() {
                     it.visibility = View.GONE
                 }
             }
+        }
+    }
+
+    private fun saveResponses(){}
+
+    private fun getResponseInput(){
+        binding.btnFinish.setOnClickListener {
+
         }
     }
 
