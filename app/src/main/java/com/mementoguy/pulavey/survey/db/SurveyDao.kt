@@ -1,9 +1,7 @@
 package com.mementoguy.pulavey.survey.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.mementoguy.pulavey.survey.model.Response
 import com.mementoguy.pulavey.survey.model.Survey
 
 /**
@@ -21,4 +19,13 @@ interface SurveyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveSurvey(survey: Survey)
+
+    @Query("SELECT * FROM Response WHERE uploadTime != null")
+    suspend fun findOfflineResponses() : List<Response>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveResponse(response: Response)
+
+    @Update
+    suspend fun updateResponse(response: Response)
 }
