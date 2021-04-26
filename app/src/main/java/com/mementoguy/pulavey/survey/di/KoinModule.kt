@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit
 
 val appModule= module {
     single<SurveyRepository>{SurveyRepositoryImpl(get(), get())}
-    viewModel { SurveyViewModel(get()) }
+    viewModel { SurveyViewModel(get(), get()) }
 }
 
 val apiModule= module {
