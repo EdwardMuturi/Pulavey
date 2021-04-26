@@ -9,6 +9,7 @@ import com.mementoguy.pulavey.survey.db.SurveyDao
 import com.mementoguy.pulavey.survey.db.SurveyDatabase
 import com.mementoguy.pulavey.survey.ui.SurveyViewModel
 import com.mementoguy.pulavey.survey.workers.SaveResponsesWorker
+import com.mementoguy.pulavey.survey.workers.SyncOfflineResponsesWorker
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -80,4 +81,5 @@ val dbModule = module {
 
 val workerModule= module {
     worker {  SaveResponsesWorker(androidContext(), get()) }
+    worker {  SyncOfflineResponsesWorker(androidContext(), get()) }
 }
