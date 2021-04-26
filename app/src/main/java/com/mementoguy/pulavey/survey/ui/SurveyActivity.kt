@@ -63,6 +63,7 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     private fun setUpQuestionnareViewPager(questions: List<Question>) {
+        binding.vpSurvey.isUserInputEnabled= false
         binding.vpSurvey.adapter = questionnareViewPagerAdapter
         questionnareViewPagerAdapter.submitList(questions)
     }
