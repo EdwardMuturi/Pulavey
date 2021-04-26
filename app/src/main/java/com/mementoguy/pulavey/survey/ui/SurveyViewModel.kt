@@ -1,5 +1,6 @@
 package com.mementoguy.pulavey.survey.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,10 +17,16 @@ class SurveyViewModel(private val surveyRepository: SurveyRepository) : ViewMode
     private val mutableQuestions: MutableLiveData<List<Question>> = MutableLiveData()
     val questions : LiveData<List<Question>> get() = mutableQuestions
 
-    fun loadSurvey(){
+    fun syncDataFromServer(){
         viewModelScope.launch {
             surveyRepository.loadDataFromServer()
-            mutableQuestions.value= surveyRepository.fetchSurveyList()[0].questions//surveyRepository.fetchSurveyFromServer().questions
+        }
+    }
+
+    fun loadSurvey(position: Int){
+        viewModelScope.launch {
+            val survey= surveyRepository.fetchSurveyList()[position]
+            mutableQuestions.value= survey.questions
         }
     }
 

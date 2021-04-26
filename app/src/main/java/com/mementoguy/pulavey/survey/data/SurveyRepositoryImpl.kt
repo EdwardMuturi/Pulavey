@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
  */
 interface SurveyRepository {
     suspend fun loadDataFromServer()
+    suspend fun saveSurvey(survey: Survey)
     suspend fun fetchSurveyFromServer(): Survey
     suspend fun fetchSurveyList(): List<Survey>
     suspend fun findSurveyById(Id: String) : Survey
@@ -19,7 +20,7 @@ interface SurveyRepository {
 class SurveyRepositoryImpl(val surveyService: SurveyService, val surveyDao: SurveyDao) : SurveyRepository {
     override suspend fun loadDataFromServer() {
         val survey= fetchSurveyFromServer()
-        surveyDao.saveSurvey(survey)
+        saveSurvey(survey)
     }
 
     override suspend fun fetchSurveyFromServer(): Survey {
@@ -33,5 +34,9 @@ class SurveyRepositoryImpl(val surveyService: SurveyService, val surveyDao: Surv
 
     override suspend fun findSurveyById(Id: String): Survey {
         return surveyDao.findSurveyById(Id)
+    }
+
+    override suspend fun saveSurvey(survey: Survey) {
+        surveyDao.saveSurvey(survey)
     }
 }
