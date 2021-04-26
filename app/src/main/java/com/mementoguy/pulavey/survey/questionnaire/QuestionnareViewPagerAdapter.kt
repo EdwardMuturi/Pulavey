@@ -31,6 +31,18 @@ class QuestionnareViewPagerAdapter() : ListAdapter<Question, QuestionnareViewPag
         fun bind(item: Question) {
             with(layoutQuestionnareBinding) {
                 tvQuestion.text= item.questionText
+
+                if(item.questionType == "SELECT_ONE") {
+                    radioGroup.visibility = View.VISIBLE
+                    tilResponse.visibility= View.GONE
+
+                    radioButton1.text= item.options[0].displayText
+                    radioButton2.text= item.options[1].displayText
+                    radioButton3.text= item.options[2].displayText
+                } else {
+                    tilResponse.visibility = View.VISIBLE
+                    radioGroup.visibility = View.GONE
+                }
             }
 
         }
