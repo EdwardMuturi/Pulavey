@@ -5,8 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.Constraints
+import androidx.work.workDataOf
+import com.google.gson.Gson
 import com.mementoguy.pulavey.survey.data.SurveyRepository
 import com.mementoguy.pulavey.survey.model.Question
+import com.mementoguy.pulavey.survey.model.Response
 import kotlinx.coroutines.launch
 
 /**
@@ -28,6 +32,12 @@ class SurveyViewModel(private val surveyRepository: SurveyRepository) : ViewMode
             val survey= surveyRepository.fetchSurveyList()[position]
             mutableQuestions.value= survey.questions
         }
+    }
+
+    fun saveResponses(responses: List<Response>){
+        val responsesData= workDataOf("responses" to Gson().toJson(responses))
+//        val saveResponseWorkRequest=
+
     }
 
 }
