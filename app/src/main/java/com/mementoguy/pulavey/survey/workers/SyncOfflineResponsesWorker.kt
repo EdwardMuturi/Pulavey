@@ -5,7 +5,6 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.mementoguy.pulavey.survey.data.SurveyRepository
-import com.mementoguy.pulavey.survey.data.SurveyRepositoryImpl
 import com.mementoguy.pulavey.survey.model.Response
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -15,13 +14,15 @@ import java.util.*
  * Created by Edward Muturi on 26/04/2021.
  */
 class SyncOfflineResponsesWorker (appContext: Context, workerParameters: WorkerParameters) : CoroutineWorker(appContext, workerParameters), KoinComponent {
-    private val surveyRepositoryImpl: SurveyRepository by inject()
+    private val surveyRepository: SurveyRepository by inject()
 
     override suspend fun doWork(): Result {
         return try {
-            findOfflineResponses().forEach { response ->
-                surveyRepositoryImpl.uploadResponse(response)
-                surveyRepositoryImpl.updateResponse(response.copy(uploadTime = Calendar.getInstance().time.toString()))
+            findOfflineResponses()
+                .map { it.copy(uploadTime = Calendar.getInstance().time.toString()) }
+                .forEach { response ->
+                surveyRepository.uploadResponse(response)
+                surveyRepository.updateResponse(response)
             }
             Result.success()
         }catch (exception: Exception){
@@ -31,6 +32,6 @@ class SyncOfflineResponsesWorker (appContext: Context, workerParameters: WorkerP
     }
 
     private suspend fun findOfflineResponses(): List<Response> {
-        return surveyRepositoryImpl.fetchResponsesNotUploaded()
+        return surveyRepository.fetchResponsesNotUploaded()
     }
 }
