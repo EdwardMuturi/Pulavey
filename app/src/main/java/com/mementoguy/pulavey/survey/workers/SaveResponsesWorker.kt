@@ -40,7 +40,6 @@ class SaveResponsesWorker(appContext: Context, workerParameters: WorkerParameter
 
     private suspend fun saveResponses(responses: List<Response>) {
         responses.forEach { response ->
-            Log.e(SaveResponsesWorker::class.java.simpleName, response.toString())
             surveyRepository.saveResponse(response)
         }
     }
