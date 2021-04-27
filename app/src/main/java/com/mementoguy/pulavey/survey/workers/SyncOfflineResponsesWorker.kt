@@ -3,6 +3,7 @@ package com.mementoguy.pulavey.survey.workers
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import com.mementoguy.pulavey.survey.data.SurveyRepositoryImpl
 import com.mementoguy.pulavey.survey.model.Response
 import org.koin.core.component.KoinComponent
@@ -21,10 +22,10 @@ class SyncOfflineResponsesWorker (appContext: Context, workerParameters: WorkerP
                 surveyRepositoryImpl.uploadResponse(response)
                 surveyRepositoryImpl.updateResponse(response.copy(uploadTime = Calendar.getInstance().time.toString()))
             }
-
             Result.success()
         }catch (exception: Exception){
-            Result.failure()
+            val outputData = workDataOf("SyncResponsesWorkerError" to exception.localizedMessage)
+            Result.failure(outputData)
         }
     }
 
