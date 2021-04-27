@@ -3,6 +3,7 @@ package com.mementoguy.pulavey.survey.ui
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -23,6 +24,7 @@ class SurveyActivity : AppCompatActivity() {
     private val questionnareViewPagerAdapter = QuestionnareViewPagerAdapter()
     private lateinit var binding: ActivitySurveyBinding
     private val surveyViewModel: SurveyViewModel by viewModel()
+    private val loadingDialog= LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +36,7 @@ class SurveyActivity : AppCompatActivity() {
 
         displayQuestions()
         getResponseInput()
-        saveResponses()
+        finishSurvey()
     }
 
 
@@ -63,6 +65,7 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     private fun setUpQuestionnareViewPager(questions: List<Question>) {
+        binding.vpSurvey.isUserInputEnabled= false
         binding.vpSurvey.adapter = questionnareViewPagerAdapter
         questionnareViewPagerAdapter.submitList(questions)
     }
@@ -73,18 +76,42 @@ class SurveyActivity : AppCompatActivity() {
                 if (vpSurvey.currentItem != questions.size - 1)
                     vpSurvey.currentItem++
                 else {
-                    btnFinish.visibility = View.VISIBLE
-                    it.visibility = View.GONE
+                   hideNextButton()
                 }
             }
         }
     }
 
-    private fun saveResponses(){
+    private fun hideNextButton(){
+        binding.btnFinish.visibility = View.VISIBLE
+        binding.btnNext.visibility = View.GONE
+    }
+
+    private fun showNextButton(){
+        binding.btnNext.visibility = View.VISIBLE
+        binding.btnFinish.visibility = View.GONE
+    }
+
+    private fun finishSurvey(){
         binding.btnFinish.setOnClickListener {
-            val responses= listOf(Response(1,"surv1", "Qtn1", "yes"))
-            surveyViewModel.saveResponses(responses)
+            loadingDialog.startLoadingDialog()
+            saveResponses()
+            dismissLoader()
         }
+    }
+
+    private fun saveResponses(){
+        val responses= listOf(Response(1,"surv1", "Qtn1", "yes"))
+        surveyViewModel.saveResponses(responses)
+    }
+
+    private fun dismissLoader(){
+        Handler().postDelayed({
+            Toast.makeText(this, "Responses saved successfully", Toast.LENGTH_SHORT).show()
+            binding.vpSurvey.currentItem= 0
+            loadingDialog.dismissDialog()
+            showNextButton()
+        }, 1000)
     }
 
     private fun getResponseInput(){
