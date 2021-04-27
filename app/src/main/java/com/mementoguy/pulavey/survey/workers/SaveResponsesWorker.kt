@@ -7,6 +7,7 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.mementoguy.pulavey.survey.data.SurveyRepository
 import com.mementoguy.pulavey.survey.data.SurveyRepositoryImpl
 import com.mementoguy.pulavey.survey.model.Question
 import com.mementoguy.pulavey.survey.model.Response
@@ -18,7 +19,7 @@ import org.koin.core.component.inject
  */
 class SaveResponsesWorker(appContext: Context, workerParameters: WorkerParameters) : CoroutineWorker(appContext, workerParameters), KoinComponent{
 
-    private val surveyRepository: SurveyRepositoryImpl by inject()
+    private val surveyRepository: SurveyRepository by inject()
 
     override suspend fun doWork(): Result {
         return try {

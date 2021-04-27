@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
+import com.mementoguy.pulavey.survey.data.SurveyRepository
 import com.mementoguy.pulavey.survey.data.SurveyRepositoryImpl
 import com.mementoguy.pulavey.survey.model.Response
 import org.koin.core.component.KoinComponent
@@ -14,7 +15,7 @@ import java.util.*
  * Created by Edward Muturi on 26/04/2021.
  */
 class SyncOfflineResponsesWorker (appContext: Context, workerParameters: WorkerParameters) : CoroutineWorker(appContext, workerParameters), KoinComponent {
-    private val surveyRepositoryImpl: SurveyRepositoryImpl by inject()
+    private val surveyRepositoryImpl: SurveyRepository by inject()
 
     override suspend fun doWork(): Result {
         return try {
