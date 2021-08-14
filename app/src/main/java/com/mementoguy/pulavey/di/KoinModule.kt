@@ -51,7 +51,7 @@ val networkModule = module {
     }
 
     fun provideRetrofit(client: OkHttpClient) : Retrofit{
-        val base_url= "https://run.mocky.io/v3/d628facc-ec18-431d-a8fc-9c096e00709a/"
+        val base_url= "https://run.mocky.io/"
 
         return Retrofit.Builder()
             .baseUrl(base_url)

@@ -8,8 +8,6 @@ import retrofit2.http.GET
  * Created by Edward Muturi on 24/04/2021.
  */
 interface SurveyService{
-    @GET("api/v1/interview")
+    @GET("v3/d628facc-ec18-431d-a8fc-9c096e00709a/")
     suspend fun fetchSurvey() : Response<Survey>
 }
-
-const val base_url= "https://6049ea8cfb5dcc001796acdc.mockapi.io/"

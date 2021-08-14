@@ -2,15 +2,8 @@ package com.mementoguy.pulavey.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
-import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import com.mementoguy.pulavey.databinding.ActivitySurveyBinding
-import com.mementoguy.pulavey.model.Question
-import com.mementoguy.pulavey.model.Response
-import com.mementoguy.pulavey.questionnaire.QuestionnareViewPagerAdapter
 import com.mementoguy.pulavey.util.SurveySharePref
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
