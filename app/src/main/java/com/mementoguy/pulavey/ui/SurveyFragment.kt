@@ -26,19 +26,20 @@ class SurveyFragment : Fragment() {
     private val binding get() = mutableBinding!!
 
     private val questionnareViewPagerAdapter = QuestionnareViewPagerAdapter()
-    private val loadingDialog= LoadingDialog(requireActivity())
+    private lateinit var loadingDialog: LoadingDialog
     private val surveyViewModel by sharedViewModel<SurveyViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        arguments?.let {
+//            param1 = it.getString(ARG_PARAM1)
+//            param2 = it.getString(ARG_PARAM2)
+//        }
+//    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mutableBinding= FragmentSurveyBinding.inflate(inflater, container, false)
+        loadingDialog= LoadingDialog(requireActivity())
         return binding.root
     }
 
@@ -85,7 +86,7 @@ class SurveyFragment : Fragment() {
         super.onDestroyView()
         mutableBinding= null
     }
-
+/*
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
@@ -95,5 +96,5 @@ class SurveyFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
+    }*/
 }

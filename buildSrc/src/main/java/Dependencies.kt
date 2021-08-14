@@ -10,7 +10,7 @@ object Versions {
     const val junitExtVersion = "1.1.2"
     const val espressoVersion = "3.3.0"
     const val viewPager2Version= "1.0.0"
-    const val koin_version= "3.0.1"
+    const val koin_version= "3.1.2"
     const val retrofit_version= "2.9.0"
     const val gson_version= "2.8.6"
     const val lifecycle_version = "2.3.1"
