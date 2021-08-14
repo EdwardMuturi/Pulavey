@@ -39,6 +39,7 @@ class SurveyFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mutableBinding= FragmentSurveyBinding.inflate(inflater, container, false)
         loadingDialog= LoadingDialog(requireActivity())
+        displayQuestions()
         return binding.root
     }
 
@@ -49,7 +50,7 @@ class SurveyFragment : Fragment() {
     }
 
     private fun displayQuestions() {
-        surveyViewModel.questions.observe(this, Observer { questions ->
+        surveyViewModel.questions.observe(viewLifecycleOwner, Observer { questions ->
             setUpQuestionnareViewPager(questions)
             displayNextQuestion(questions)
         })
