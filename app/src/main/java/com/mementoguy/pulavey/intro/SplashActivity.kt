@@ -7,7 +7,7 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.mementoguy.pulavey.databinding.ActivitySplashBinding
-import com.mementoguy.pulavey.survey.ui.SurveyActivity
+import com.mementoguy.pulavey.ui.SurveyActivity
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding

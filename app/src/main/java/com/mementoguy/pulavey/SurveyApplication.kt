@@ -1,7 +1,7 @@
 package com.mementoguy.pulavey
 
 import android.app.Application
-import com.mementoguy.pulavey.survey.di.*
+import com.mementoguy.pulavey.di.*
 import com.mementoguy.pulavey.util.SurveySharePref
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

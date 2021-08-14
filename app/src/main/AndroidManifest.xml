@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".survey.ui.SurveyActivity"
+            android:name="com.mementoguy.pulavey.ui.SurveyActivity"
             android:exported="true">
         </activity>
 
