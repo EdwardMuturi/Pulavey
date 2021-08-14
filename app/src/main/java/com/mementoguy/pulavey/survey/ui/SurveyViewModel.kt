@@ -35,8 +35,14 @@ class SurveyViewModel(private val surveyRepository: SurveyRepository, applicatio
 
     fun loadSurvey(position: Int){
         viewModelScope.launch {
-            val survey= surveyRepository.fetchSurveyList()[position]
-            mutableQuestions.value= survey.questions
+           try {
+               val surveyList= surveyRepository.fetchSurveyList()
+               if (surveyList.isEmpty())
+                   throw IndexOutOfBoundsException("Empty Survey List")
+               mutableQuestions.value= surveyList[position].questions
+           }catch (e: IndexOutOfBoundsException){
+               Log.e(SurveyViewModel::class.simpleName, "Empty Survey List")
+           }
         }
     }
 
