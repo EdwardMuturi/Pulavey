@@ -16,6 +16,7 @@ object Versions {
     const val lifecycle_version = "2.3.1"
     const val okhttp_version= "4.3.1"
     const val room_version = "2.3.0"
+    const val androidXFragmentVersion= "1.3.6"
 }
 
 object Dependencies {
@@ -39,5 +40,6 @@ object Dependencies {
     const val room_compiler= "androidx.room:room-compiler:${Versions.room_version}"
     const val room_ktx= "androidx.room:room-ktx:${Versions.room_version}"
     const val room_testing= "androidx.room:room-testing:${Versions.room_version}"
+    const val androidX_fragment= "androidx.fragment:fragment-ktx:${Versions.androidXFragmentVersion}"
 
 }

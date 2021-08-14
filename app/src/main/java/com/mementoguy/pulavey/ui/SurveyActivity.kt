@@ -24,14 +24,14 @@ class SurveyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        loadData()
+//        loadData()
 
         binding = ActivitySurveyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        displayQuestions()
-        getResponseInput()
-        finishSurvey()
+//        displayQuestions()
+//        getResponseInput()
+//        finishSurvey()
     }
 
 

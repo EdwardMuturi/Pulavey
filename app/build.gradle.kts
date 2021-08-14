@@ -57,6 +57,7 @@ dependencies {
         implementation(okhttp_interceptor)
         implementation(room)
         implementation(room_ktx)
+        implementation(androidX_fragment)
         kapt (room_compiler)
         testImplementation(room_testing)
         testImplementation(junit)
