@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     with(Dependencies) {
         implementation(kotlin_ktx)
         implementation(app_compat)
