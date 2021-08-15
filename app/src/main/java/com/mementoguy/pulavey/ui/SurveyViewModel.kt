@@ -10,6 +10,7 @@ import androidx.work.*
 import com.google.gson.Gson
 import com.mementoguy.pulavey.data.SurveyRepository
 import com.mementoguy.pulavey.model.Question
+import com.mementoguy.pulavey.model.Questionnaire
 import com.mementoguy.pulavey.model.Response
 import com.mementoguy.pulavey.workers.SaveResponsesWorker
 import com.mementoguy.pulavey.workers.SyncOfflineResponsesWorker
@@ -23,6 +24,9 @@ class SurveyViewModel(private val surveyRepository: SurveyRepository, applicatio
 
     private val mutableQuestions: MutableLiveData<List<Question>> = MutableLiveData()
     val questions : LiveData<List<Question>> get() = mutableQuestions
+
+    private val mutableQuestionnaire: MutableLiveData<List<Questionnaire>> = MutableLiveData()
+    val questionnaires : LiveData<List<Questionnaire>> get() = mutableQuestionnaire
     private val workManager= WorkManager.getInstance(application)
 
     init {
@@ -41,6 +45,9 @@ class SurveyViewModel(private val surveyRepository: SurveyRepository, applicatio
                val surveyList= surveyRepository.fetchSurveyList()
                if (surveyList.isEmpty())
                    throw IndexOutOfBoundsException("Empty Survey List")
+               mutableQuestionnaire.value= surveyList[position].questions.map {
+                   Questionnaire(it, surveyList[position].strings.en)
+               }
                mutableQuestions.value= surveyList[position].questions
            }catch (e: IndexOutOfBoundsException){
                Log.e(SurveyViewModel::class.simpleName, "Empty Survey List")

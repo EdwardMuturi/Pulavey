@@ -3,6 +3,7 @@ package com.mementoguy.pulavey.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
 @Entity
@@ -22,4 +23,9 @@ data class En(
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Int? = 0
+}
+
+fun En.toMap(): Map<String, String>{
+    val enString= Gson().toJson(this)
+    return Gson().fromJson(enString, Map::class.java) as Map<String, String>
 }

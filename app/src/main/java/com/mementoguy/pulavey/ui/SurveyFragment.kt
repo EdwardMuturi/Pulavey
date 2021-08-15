@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.mementoguy.pulavey.databinding.FragmentSurveyBinding
-import com.mementoguy.pulavey.model.Question
+import com.mementoguy.pulavey.model.Questionnaire
 import com.mementoguy.pulavey.model.Response
-import com.mementoguy.pulavey.questionnaire.QuestionnareViewPagerAdapter
+import com.mementoguy.pulavey.questionnaire.QuestionnaireViewPagerAdapter
 import com.mementoguy.pulavey.util.OnQuestionResponseListener
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -26,7 +25,7 @@ class SurveyFragment : Fragment(), OnQuestionResponseListener {
     private var mutableBinding: FragmentSurveyBinding? = null
     private val binding get() = mutableBinding!!
 
-    private val questionnareViewPagerAdapter = QuestionnareViewPagerAdapter(this)
+    private val questionnareViewPagerAdapter = QuestionnaireViewPagerAdapter(this)
     private lateinit var loadingDialog: LoadingDialog
     private val surveyViewModel by sharedViewModel<SurveyViewModel>()
 
@@ -37,15 +36,15 @@ class SurveyFragment : Fragment(), OnQuestionResponseListener {
         return binding.root
     }
 
-    private fun setUpQuestionnareViewPager(questions: List<Question>) {
+    private fun setUpQuestionnareViewPager(questionnaires: List<Questionnaire>) {
         binding.vpSurvey.isUserInputEnabled = false
         binding.vpSurvey.adapter = questionnareViewPagerAdapter
-        questionnareViewPagerAdapter.submitList(questions)
+        questionnareViewPagerAdapter.submitList(questionnaires)
     }
 
     private fun populateQuestionnaire() {
-        surveyViewModel.questions.observe(viewLifecycleOwner, { questions ->
-            setUpQuestionnareViewPager(questions)
+        surveyViewModel.questionnaires.observe(viewLifecycleOwner, { questionnaires ->
+            setUpQuestionnareViewPager(questionnaires)
         })
     }
 
