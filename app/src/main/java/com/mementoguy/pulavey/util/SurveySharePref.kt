@@ -16,13 +16,13 @@ object SurveySharePref {
         sharePref= context.getSharedPreferences("SurveySharedPref", Context.MODE_PRIVATE)
     }
 
-    fun setFirstLaunch(){
+    fun updateIsFirstLaunch(){
         sharePref.edit {
-            putBoolean(IS_FIRST_LAUNCH, true)
+            putBoolean(IS_FIRST_LAUNCH, false)
         }
     }
 
     fun checkIsAppFirstLaunch(): Boolean {
-        return sharePref.getBoolean(IS_FIRST_LAUNCH, false)
+        return sharePref.getBoolean(IS_FIRST_LAUNCH, true)
     }
 }

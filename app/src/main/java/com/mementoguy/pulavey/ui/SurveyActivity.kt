@@ -14,28 +14,24 @@ class SurveyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivitySurveyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         loadData()
     }
 
-    private fun loadData(){
+    private fun loadData() {
         // assumes list of survey and position represents selected survey
-        val surveyPosition= 0
+        val surveyPosition = 0
+        val tag = SurveyActivity::class.simpleName
 
-        when (SurveySharePref.checkIsAppFirstLaunch()){
-            false -> {
-                surveyViewModel.syncDataFromServer()
-                SurveySharePref.setFirstLaunch()
-            }
-            true -> {
-                surveyViewModel.loadSurvey(surveyPosition)
-                Log.i(SurveyActivity::class.simpleName, "Not App first launch, skipping data sync...")
-            }
+        if (SurveySharePref.checkIsAppFirstLaunch()) {
+            Log.i(tag, "Syncing data from server...")
+            surveyViewModel.syncDataFromServer()
+            SurveySharePref.updateIsFirstLaunch()
         }
 
+        surveyViewModel.loadSurvey(surveyPosition)
     }
 
 }
