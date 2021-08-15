@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mementoguy.pulavey.databinding.LayoutQuestionnareBinding
 import com.mementoguy.pulavey.model.Question
+import com.mementoguy.pulavey.util.OnQuestionResponseListener
 
 /**
  * Created by Edward Muturi on 22/04/2021.
  */
-class QuestionnareViewPagerAdapter() : ListAdapter<Question, QuestionnareViewPagerAdapter.ViewHolder>(itemDiffUtil) {
-
+class QuestionnareViewPagerAdapter(private val onQuestionResponseListener: OnQuestionResponseListener) : ListAdapter<Question, QuestionnareViewPagerAdapter.ViewHolder>(itemDiffUtil) {
+    private val listener= onQuestionResponseListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding= LayoutQuestionnareBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,6 +32,9 @@ class QuestionnareViewPagerAdapter() : ListAdapter<Question, QuestionnareViewPag
         fun bind(item: Question) {
             with(layoutQuestionnareBinding) {
                 tvQuestion.text= item.questionText
+                btnNext.setOnClickListener {
+                    listener.onQuestionResponse("Displaying Next Question")
+                }
 
                 if(item.questionType == "SELECT_ONE") {
                     radioGroup.visibility = View.VISIBLE
