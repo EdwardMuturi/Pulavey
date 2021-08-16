@@ -33,7 +33,7 @@ class TextInputQuestionnaireFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val argString= requireArguments().getString("questionnaire")
+        val argString= requireArguments().getString(Constants.QUESTIONNAIRE_BUNDLE)
         val questionnaire= Gson().fromJson(argString, Questionnaire::class.java)
 
         displayQuestion(questionnaire)
