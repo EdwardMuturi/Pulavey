@@ -10,6 +10,7 @@ import com.google.gson.Gson
 import com.mementoguy.pulavey.R
 import com.mementoguy.pulavey.databinding.ActivitySurveyBinding
 import com.mementoguy.pulavey.ui.RadioInputQuestionnaire.RadioQuestionnaireFragment
+import com.mementoguy.pulavey.util.Constants
 import com.mementoguy.pulavey.util.SurveySharePref
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,7 +44,7 @@ class SurveyActivity : AppCompatActivity() {
 
     private fun loadQuestionnaire(){
         surveyViewModel.questionnaires.observe(this, {
-            val bundle= bundleOf("questionnaire" to Gson().toJson(it.first()))
+            val bundle= bundleOf( Constants.QUESTIONNAIRE_BUNDLE to Gson().toJson(it.first()))
             when (it.first().question.questionType  == "SELECT_ONE"){
                 true ->{
                     supportFragmentManager.commit {
