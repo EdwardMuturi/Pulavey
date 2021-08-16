@@ -1,11 +1,13 @@
 package com.mementoguy.pulavey.ui.RadioInputQuestionnaire
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -19,14 +21,15 @@ import com.mementoguy.pulavey.model.toMap
 import com.mementoguy.pulavey.ui.SurveyViewModel
 import com.mementoguy.pulavey.ui.TextInputQuestionnaireFragment
 import com.mementoguy.pulavey.util.Constants
+import com.mementoguy.pulavey.util.LoadingDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class RadioQuestionnaireFragment : Fragment() {
 
     private var _binding : FragmentRadioQuestionnaireBinding?= null
     private val binding get() = _binding!!
-
     private val surveyViewModel by sharedViewModel<SurveyViewModel>()
+    private lateinit var loadingDialog : LoadingDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding= FragmentRadioQuestionnaireBinding.inflate(inflater, container, false)
@@ -37,6 +40,7 @@ class RadioQuestionnaireFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val argString= requireArguments().getString("questionnaire")
         val questionnaire= Gson().fromJson(argString, Questionnaire::class.java)
+        loadingDialog= LoadingDialog(requireActivity())
 
         displayQuestion(questionnaire)
         setRadioButtonsLabel(questionnaire)
@@ -69,6 +73,8 @@ class RadioQuestionnaireFragment : Fragment() {
             val response= Response(questionId= questionnaire.question.id, value = getResponse(questionnaire.question))
             surveyViewModel.updateResponses(response)
             surveyViewModel.saveResponses()
+            loadingDialog.startLoadingDialog()
+            dismissLoader()
         }
     }
 
@@ -120,6 +126,13 @@ class RadioQuestionnaireFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun dismissLoader(){
+        Handler().postDelayed({
+            loadingDialog.dismissDialog()
+            Toast.makeText(requireContext(), "Responses saved successfully", Toast.LENGTH_SHORT).show()
+        }, 1000)
     }
 
     override fun onDestroyView() {
