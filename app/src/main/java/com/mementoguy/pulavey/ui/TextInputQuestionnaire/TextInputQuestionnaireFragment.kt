@@ -37,7 +37,19 @@ class TextInputQuestionnaireFragment : Fragment() {
         val questionnaire= Gson().fromJson(argString, Questionnaire::class.java)
 
         displayQuestion(questionnaire)
-        displayNextQuestion(questionnaire)
+        when(questionnaire.question.next == null){
+            true->  finishSurvey(questionnaire)
+            false-> displayNextQuestion(questionnaire)
+        }
+    }
+
+    private fun finishSurvey(questionnaire: Questionnaire){
+        binding.btnNext.visibility= View.GONE
+        binding.btnFinish.visibility= View.VISIBLE
+
+        binding.btnFinish.setOnClickListener {
+            getResponse()
+        }
     }
 
     private fun displayQuestion(questionnaire: Questionnaire) {

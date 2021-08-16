@@ -6,12 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.google.gson.Gson
+import com.mementoguy.pulavey.R
 import com.mementoguy.pulavey.databinding.FragmentRadioQuestionnaireBinding
 import com.mementoguy.pulavey.model.Question
 import com.mementoguy.pulavey.model.Questionnaire
 import com.mementoguy.pulavey.model.toMap
 import com.mementoguy.pulavey.ui.SurveyViewModel
+import com.mementoguy.pulavey.ui.TextInputQuestionnaireFragment
+import com.mementoguy.pulavey.util.Constants
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class RadioQuestionnaireFragment : Fragment() {
@@ -33,7 +39,20 @@ class RadioQuestionnaireFragment : Fragment() {
 
         displayQuestion(questionnaire)
         setRadioButtonsLabel(questionnaire)
-        displayNextQuestion(questionnaire)
+
+        when(questionnaire.question.next == null){
+            true->  finishSurvey(questionnaire)
+            false-> displayNextQuestion(questionnaire)
+        }
+    }
+
+    private fun finishSurvey(questionnaire: Questionnaire){
+        binding.btnNext.visibility= View.GONE
+        binding.btnFinish.visibility= View.VISIBLE
+
+        binding.btnFinish.setOnClickListener {
+            getResponse(questionnaire.question)
+        }
     }
 
     private fun displayQuestion(questionnaire: Questionnaire) {
@@ -54,6 +73,7 @@ class RadioQuestionnaireFragment : Fragment() {
     private fun displayNextQuestion(questionnaire: Questionnaire) {
         binding.btnNext.setOnClickListener {
             getResponse(questionnaire.question)
+            loadNextQuestion(questionnaire)
         }
     }
 
@@ -65,6 +85,33 @@ class RadioQuestionnaireFragment : Fragment() {
                     radioButton1.id ->{ Log.e(tag, "selected Choice ${question.options[0].value}") }
                     radioButton2.id ->{ Log.e(tag, "selected Choice ${question.options[1].value}") }
                     radioButton3.id ->{ Log.e(tag, "selected Choice ${question.options[2].value}") }
+                }
+            }
+        }
+    }
+
+    private fun loadNextQuestion(questionnaire: Questionnaire){
+        surveyViewModel.questionnaires.observe(viewLifecycleOwner, {questionnaires ->
+            val nextQuestionnaire= questionnaires.find {qn ->
+                questionnaire.question.next == qn.question.id
+            }
+            if (nextQuestionnaire != null)
+                navigateToNextQuestionnaire(nextQuestionnaire)
+        })
+    }
+
+    private fun navigateToNextQuestionnaire(nextQuestionnaire: Questionnaire) {
+        val bundle= bundleOf(Constants.QUESTIONNAIRE_BUNDLE to Gson().toJson(nextQuestionnaire) )
+
+        when (nextQuestionnaire.question.questionType  == "SELECT_ONE"){
+            true ->{
+                requireActivity().supportFragmentManager.commit {
+                    replace<RadioQuestionnaireFragment>(R.id.fragmentContainer, args = bundle)
+                }
+            }
+            false ->{
+                requireActivity().supportFragmentManager.commit {
+                    replace<TextInputQuestionnaireFragment>(R.id.fragmentContainer,  args = bundle)
                 }
             }
         }
