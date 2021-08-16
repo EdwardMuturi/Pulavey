@@ -12,7 +12,7 @@ import com.mementoguy.pulavey.model.Questionnaire
 import com.mementoguy.pulavey.model.toMap
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class SurveyFragment : Fragment() {
+class TextInputQuestionnaireFragment : Fragment() {
 
     private var mutableBinding: FragmentTextInputQuestionnaireBinding? = null
     private val binding get() = mutableBinding!!
@@ -44,7 +44,7 @@ class SurveyFragment : Fragment() {
     }
 
     private fun getResponse(){
-        Log.e(SurveyFragment::class.simpleName, "getResponse: ${binding.tietResponse.text.toString().trim()}")
+        Log.e(TextInputQuestionnaireFragment::class.simpleName, "getResponse: ${binding.tietResponse.text.toString().trim()}")
     }
     override fun onDestroyView() {
         super.onDestroyView()

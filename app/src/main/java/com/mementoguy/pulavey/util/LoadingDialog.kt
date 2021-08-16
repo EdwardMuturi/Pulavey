@@ -1,4 +1,4 @@
-package com.mementoguy.pulavey.ui
+package com.mementoguy.pulavey.util
 
 import android.app.Activity
 import androidx.appcompat.app.AlertDialog

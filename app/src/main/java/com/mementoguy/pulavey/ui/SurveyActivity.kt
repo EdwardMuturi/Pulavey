@@ -9,6 +9,7 @@ import androidx.fragment.app.commit
 import com.google.gson.Gson
 import com.mementoguy.pulavey.R
 import com.mementoguy.pulavey.databinding.ActivitySurveyBinding
+import com.mementoguy.pulavey.ui.RadioInputQuestionnaire.RadioQuestionnaireFragment
 import com.mementoguy.pulavey.util.SurveySharePref
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -51,7 +52,7 @@ class SurveyActivity : AppCompatActivity() {
                 }
                 false ->{
                     supportFragmentManager.commit {
-                        add<SurveyFragment>(R.id.fragmentContainer,  args = bundle)
+                        add<TextInputQuestionnaireFragment>(R.id.fragmentContainer,  args = bundle)
                     }
                 }
             }

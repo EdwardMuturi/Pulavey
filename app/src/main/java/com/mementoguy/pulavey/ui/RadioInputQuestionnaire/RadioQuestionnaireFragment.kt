@@ -1,4 +1,4 @@
-package com.mementoguy.pulavey.ui
+package com.mementoguy.pulavey.ui.RadioInputQuestionnaire
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mementoguy.pulavey.R
+import com.mementoguy.pulavey.ui.SurveyViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class RadioQuestionnaireFragment : Fragment() {
