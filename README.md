@@ -12,3 +12,6 @@ Below is a list of libraries used:
 * Room
 * Coroutines
 
+### Known bug
+* Blank questionnaire on first launch : Questionnaire is empty on first launch, user has to restart app.
+
