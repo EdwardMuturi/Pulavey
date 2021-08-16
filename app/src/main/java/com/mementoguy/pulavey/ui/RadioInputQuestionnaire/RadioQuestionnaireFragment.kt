@@ -14,6 +14,7 @@ import com.mementoguy.pulavey.R
 import com.mementoguy.pulavey.databinding.FragmentRadioQuestionnaireBinding
 import com.mementoguy.pulavey.model.Question
 import com.mementoguy.pulavey.model.Questionnaire
+import com.mementoguy.pulavey.model.Response
 import com.mementoguy.pulavey.model.toMap
 import com.mementoguy.pulavey.ui.SurveyViewModel
 import com.mementoguy.pulavey.ui.TextInputQuestionnaireFragment
@@ -46,20 +47,10 @@ class RadioQuestionnaireFragment : Fragment() {
         }
     }
 
-    private fun finishSurvey(questionnaire: Questionnaire){
-        binding.btnNext.visibility= View.GONE
-        binding.btnFinish.visibility= View.VISIBLE
-
-        binding.btnFinish.setOnClickListener {
-            getResponse(questionnaire.question)
-        }
-    }
-
     private fun displayQuestion(questionnaire: Questionnaire) {
         val enMap= questionnaire.en.toMap()
         binding.tvQuestion.text= enMap[questionnaire.question.questionText]
     }
-
 
     private fun setRadioButtonsLabel(questionnaire: Questionnaire){
         val enMap = questionnaire.en.toMap()
@@ -70,24 +61,38 @@ class RadioQuestionnaireFragment : Fragment() {
         }
     }
 
+    private fun finishSurvey(questionnaire: Questionnaire){
+        binding.btnNext.visibility= View.GONE
+        binding.btnFinish.visibility= View.VISIBLE
+
+        binding.btnFinish.setOnClickListener {
+            val response= Response(questionId= questionnaire.question.id, value = getResponse(questionnaire.question))
+            surveyViewModel.updateResponses(response)
+            surveyViewModel.saveResponses()
+        }
+    }
+
     private fun displayNextQuestion(questionnaire: Questionnaire) {
         binding.btnNext.setOnClickListener {
-            getResponse(questionnaire.question)
+            val response= Response(questionId= questionnaire.question.id, value = getResponse(questionnaire.question))
+            surveyViewModel.updateResponses(response)
             loadNextQuestion(questionnaire)
         }
     }
 
-    private fun getResponse(question: Question) {
-        val tag= RadioQuestionnaireFragment::class.simpleName
+    private fun getResponse(question: Question): String {
+        var responseString= ""
         with(binding){
             radioGroup.setOnCheckedChangeListener { radioGroup, checkedId ->
                 when(checkedId){
-                    radioButton1.id ->{ Log.e(tag, "selected Choice ${question.options[0].value}") }
-                    radioButton2.id ->{ Log.e(tag, "selected Choice ${question.options[1].value}") }
-                    radioButton3.id ->{ Log.e(tag, "selected Choice ${question.options[2].value}") }
+                    radioButton1.id -> responseString= question.options[0].value
+                    radioButton2.id -> responseString=  question.options[1].value
+                    radioButton3.id -> responseString= question.options[2].value
                 }
             }
         }
+
+        return responseString
     }
 
     private fun loadNextQuestion(questionnaire: Questionnaire){

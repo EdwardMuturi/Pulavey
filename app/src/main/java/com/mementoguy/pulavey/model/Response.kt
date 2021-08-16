@@ -9,8 +9,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class Response(
     @PrimaryKey(autoGenerate = true)
-    val Id: Int,
-    val surveyId: String,
+    val Id: Int= 0,
     val questionId: String,
     val value: String,
     val uploadTime: String? = null

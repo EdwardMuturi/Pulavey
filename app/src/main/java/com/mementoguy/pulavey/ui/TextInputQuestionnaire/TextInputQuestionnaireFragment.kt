@@ -14,6 +14,7 @@ import com.google.gson.Gson
 import com.mementoguy.pulavey.R
 import com.mementoguy.pulavey.databinding.FragmentTextInputQuestionnaireBinding
 import com.mementoguy.pulavey.model.Questionnaire
+import com.mementoguy.pulavey.model.Response
 import com.mementoguy.pulavey.model.toMap
 import com.mementoguy.pulavey.ui.RadioInputQuestionnaire.RadioQuestionnaireFragment
 import com.mementoguy.pulavey.util.Constants
@@ -48,7 +49,9 @@ class TextInputQuestionnaireFragment : Fragment() {
         binding.btnFinish.visibility= View.VISIBLE
 
         binding.btnFinish.setOnClickListener {
-            getResponse()
+            val response= Response(questionId= questionnaire.question.id, value = getResponse())
+            surveyViewModel.updateResponses(response)
+            surveyViewModel.saveResponses()
         }
     }
 
@@ -59,13 +62,16 @@ class TextInputQuestionnaireFragment : Fragment() {
 
     private fun displayNextQuestion(questionnaire: Questionnaire) {
         binding.btnNext.setOnClickListener {
-            getResponse()
+            val response= Response(questionId= questionnaire.question.id, value = getResponse())
+            surveyViewModel.updateResponses(response)
             loadNextQuestion(questionnaire)
         }
     }
 
-    private fun getResponse(){
-        Log.e(TextInputQuestionnaireFragment::class.simpleName, "getResponse: ${binding.tietResponse.text.toString().trim()}")
+    private fun getResponse() : String {
+        val responseString= binding.tietResponse.text.toString().trim()
+        binding.tietResponse.setText("")
+        return responseString
     }
 
     private fun loadNextQuestion(questionnaire: Questionnaire){

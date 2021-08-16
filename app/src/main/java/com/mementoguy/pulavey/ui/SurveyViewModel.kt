@@ -22,12 +22,12 @@ import java.util.concurrent.TimeUnit
  */
 class SurveyViewModel(private val surveyRepository: SurveyRepository, application: Application) : AndroidViewModel(application) {
 
-    private val mutableQuestions: MutableLiveData<List<Question>> = MutableLiveData()
-    val questions : LiveData<List<Question>> get() = mutableQuestions
-
     private val mutableQuestionnaire: MutableLiveData<List<Questionnaire>> = MutableLiveData()
     val questionnaires : LiveData<List<Questionnaire>> get() = mutableQuestionnaire
+
     private val workManager= WorkManager.getInstance(application)
+
+    private val responses= mutableListOf<Response>()
 
     init {
         uploadResponses()
@@ -45,17 +45,21 @@ class SurveyViewModel(private val surveyRepository: SurveyRepository, applicatio
                val surveyList= surveyRepository.fetchSurveyList()
                if (surveyList.isEmpty())
                    throw IndexOutOfBoundsException("Empty Survey List")
+
                mutableQuestionnaire.value= surveyList[position].questions.map {
                    Questionnaire(it, surveyList[position].strings.en)
                }
-               mutableQuestions.value= surveyList[position].questions
            }catch (e: IndexOutOfBoundsException){
                Log.e(SurveyViewModel::class.simpleName, "Empty Survey List")
            }
         }
     }
 
-    fun saveResponses(responses: List<Response>){
+    fun updateResponses(response: Response){
+        responses.add(response)
+    }
+
+    fun saveResponses(){
         val responsesData= workDataOf("responses" to Gson().toJson(responses))
         val saveResponseWorkRequest= OneTimeWorkRequestBuilder<SaveResponsesWorker>()
             .setInputData(responsesData)
